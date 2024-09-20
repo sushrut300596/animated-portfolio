@@ -31,17 +31,22 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        "service_94y20xo",
-        "template_v10u2oh",
+        "service_hozhlba", // Replace with your EmailJS service ID
+        "template_o029kjn", // Replace with your EmailJS template ID
         formRef.current,
-        "pX_2hasGmGcuvjXIW"
+        "aB0i0Za1ilFc7BVyK"   // Replace with your EmailJS public key
       )
       .then(
         (result) => {
-          setSuccess(true)
+          console.log(result.text);
+          setSuccess(true);
+          setError(false);
+          formRef.current.reset(); // Reset the form after successful submission
         },
         (error) => {
+          console.log(error.text);
           setError(true);
+          setSuccess(false);
         }
       );
   };
@@ -58,15 +63,15 @@ const Contact = () => {
         <motion.h1 variants={variants}>Let’s work together</motion.h1>
         <motion.div className="item" variants={variants}>
           <h2>Mail</h2>
-          <span>hello@react.dev</span>
+          <span>sushrut.shendre@gmail.com</span>
         </motion.div>
         <motion.div className="item" variants={variants}>
           <h2>Address</h2>
-          <span>Hello street New York</span>
+          <span>Kharadi, Pune</span>
         </motion.div>
         <motion.div className="item" variants={variants}>
           <h2>Phone</h2>
-          <span>+1 234 5678</span>
+          <span>9420234754</span>
         </motion.div>
       </motion.div>
       <div className="formContainer">
@@ -106,12 +111,12 @@ const Contact = () => {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 4, duration: 1 }}
         >
-          <input type="text" required placeholder="Name" name="name"/>
-          <input type="email" required placeholder="Email" name="email"/>
-          <textarea rows={8} placeholder="Message" name="message"/>
-          <button>Submit</button>
-          {error && "Error"}
-          {success && "Success"}
+          <input type="text" required placeholder="Name" name="name" />
+          <input type="email" required placeholder="Email" name="email" />
+          <textarea rows={8} placeholder="Message" name="message" />
+          <button type="submit">Submit</button>
+          {error && <span style={{ color: 'red' }}>Error sending message.</span>}
+          {success && <span style={{ color: 'green' }}>Message sent successfully!</span>}
         </motion.form>
       </div>
     </motion.div>
